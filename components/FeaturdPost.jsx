@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import InfoPost from "./InfoPost";
 
-const FeaturdPost = () => {
+const FeaturdPost = (props) => {
   return (
     <article>
       <div className="flex -mx-4 lg:items-center items-start flex-wrap">
@@ -10,7 +10,10 @@ const FeaturdPost = () => {
           <Link href="/detail">
             <a>
               <img
-                src="/featured-thumb.png"
+                src={
+                  process.env.NEXT_PUBLIC_APIURL +
+                  props.thumbnail.formats.medium.url
+                }
                 className="rounded-xl w-full mb-4 md:mb-0"
               />
             </a>
@@ -18,13 +21,15 @@ const FeaturdPost = () => {
         </div>
         <div className="lg:w-4/12 md:w-5/12 w-full px-4">
           <InfoPost
-            category="UI Designer"
-            date="July 2, 2021"
-            title="Understanding color theory: the color wheel and finding complementary colors"
-            shortDescription="Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco cillum dolor. Voluptate exercitation incididunt aliquip deserunt reprehenderit elit laborum."
-            authorName="Leslie Alexander"
-            authorJob="UI Designer"
-            authorAvatar="/author-1.png"
+            category={props.category.name}
+            date={props.published_at}
+            title={props.title}
+            shortDescription={props.headline}
+            authorName={props.author.name}
+            authorJob={props.author.job}
+            authorAvatar={
+              process.env.NEXT_PUBLIC_APIURL + props.author.avatar.url
+            }
           />
         </div>
       </div>

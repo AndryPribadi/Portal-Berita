@@ -2,16 +2,29 @@ import Link from "next/link";
 import React from "react";
 import InfoPost from "./InfoPost";
 
-const CardPost = ({ thumbnail, ...infoPost }) => {
+const CardPost = (props) => {
   return (
     <div>
       <article>
         <Link href="/detail">
           <a>
-            <img src={thumbnail} className="w-full rounded mb-4" />
+            <img
+              src={process.env.NEXT_PUBLIC_APIURL + props.thumbnail.url}
+              className="w-full rounded mb-4"
+            />
           </a>
         </Link>
-        <InfoPost {...infoPost} />
+        <InfoPost
+          category={props.category.name}
+          date={props.published_at}
+          title={props.title}
+          shortDescription={props.headline}
+          authorName={props.author.name}
+          authorJob={props.author.job}
+          authorAvatar={
+            process.env.NEXT_PUBLIC_APIURL + props.author.avatar.url
+          }
+        />
       </article>
     </div>
   );

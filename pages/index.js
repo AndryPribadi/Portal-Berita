@@ -10,21 +10,23 @@ export async function getServerSideProps() {
   const reqFeatured = await fetch(
     process.env.NEXT_PUBLIC_APIURL + "/posts?featured=true"
   );
-  let featured = await reqFeatured.json();
+  const featured = await reqFeatured.json();
 
-  if (featured.lenght < 1) {
-    featured = {};
-  }
+  const reqPosts = await fetch(
+    process.env.NEXT_PUBLIC_APIURL + "/posts?featured_ne=true"
+  );
+  const posts = await reqPosts.json();
 
   return {
     props: {
-      featured: featured[0],
+      featured: featured.length > 0 ? featured[0] : false,
+      posts,
     },
   };
 }
 
-export default function Home({ featured }) {
-  const [posts, setPost] = useState(mockPosts);
+export default function Home({ featured, posts: initialPosts }) {
+  const [posts, setPost] = useState(initialPosts);
 
   return (
     <Layout>
@@ -32,7 +34,7 @@ export default function Home({ featured }) {
         <title>Home &mdash; Epictetus</title>
       </Head>
       <Container>
-        <FeaturdPost {...featured} />
+        {featured && <FeaturdPost {...featured} />}
         <div className="flex -mx-4 flex-wrap mt-6">
           {posts.map((post) => (
             <div key={post.id} className="md:w-4/12 w-full px-4 py-6">

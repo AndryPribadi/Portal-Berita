@@ -6,7 +6,7 @@ const CardPost = (props) => {
   return (
     <div>
       <article>
-        <Link href="/detail">
+        <Link href={props.slug}>
           <a>
             <img
               src={process.env.NEXT_PUBLIC_APIURL + props.thumbnail.url}
@@ -15,6 +15,7 @@ const CardPost = (props) => {
           </a>
         </Link>
         <InfoPost
+          slug={props.slug}
           category={props.category.name}
           date={props.published_at}
           title={props.title}

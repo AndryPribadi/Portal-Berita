@@ -11,6 +11,7 @@ const InfoPost = ({
   authorAvatar,
   authorName,
   authorJob,
+  slug,
 }) => {
   return (
     <>
@@ -18,6 +19,7 @@ const InfoPost = ({
         category={category}
         date={formatDate(date)}
         title={title}
+        slug={slug}
       />
       <p className="text-white/60 mt-5 w-10/12">{shortDescription}</p>
       <PostAuthor

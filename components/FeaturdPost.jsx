@@ -7,7 +7,7 @@ const FeaturdPost = (props) => {
     <article>
       <div className="flex -mx-4 lg:items-center items-start flex-wrap">
         <div className="px-4 lg:w-8/12 md:w-7/12 w-full">
-          <Link href="/detail">
+          <Link href={props.slug}>
             <a>
               <img
                 src={
@@ -21,6 +21,7 @@ const FeaturdPost = (props) => {
         </div>
         <div className="lg:w-4/12 md:w-5/12 w-full px-4">
           <InfoPost
+            slug={props.slug}
             category={props.category.name}
             date={props.published_at}
             title={props.title}
